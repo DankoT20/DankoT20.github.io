@@ -36,8 +36,10 @@ html {
 
   margin-left: 20%;
 }
-.fejlec p {
+.fejlec p,
+a {
   font-size: xx-large;
+  text-decoration: none;
   color: white;
   margin-top: 40px;
   text-shadow: 4px 2px 8px #fff;
