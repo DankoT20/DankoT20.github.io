@@ -11,10 +11,10 @@ body {
   margin-left: 20%;
 }
 .fejlec {
-  background: #120052;
+  background: #290b94;
   border-radius: 20px;
 }
-a {
+.fejlec a {
   position: relative;
   display: inline-block;
   padding: 15px 30px;
@@ -24,7 +24,7 @@ a {
   overflow: hidden;
   transition: 1s;
 }
-a:hover {
+.fejlec a:hover {
   color: #032731;
 
   transition: 1s;
@@ -33,66 +33,112 @@ a:hover {
   box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
   border-radius: 10px;
 }
-a span {
+.fejlec a span {
   position: absolute;
   display: block;
 }
 /* FENTI VONAL */
-a span:nth-child(1) {
+.fejlec a span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
   height: 2px;
   background: linear-gradient(90deg, transparent, #dcf823);
 }
-a:hover span:nth-child(1) {
+.fejlec a:hover span:nth-child(1) {
   left: 100%;
   transition: 1s;
 }
 /* LENTI VONAL */
-a span:nth-child(3) {
+.fejlec a span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
   height: 2px;
   background: linear-gradient(270deg, transparent, #250dc2);
 }
-a:hover span:nth-child(3) {
+.fejlec a:hover span:nth-child(3) {
   right: 100%;
   transition: 1s;
   transition-delay: 0.5s;
 }
 /* JOBB OLDAL */
-a span:nth-child(2) {
+.fejlec a span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
   height: 100%;
   background: linear-gradient(180deg, transparent, #dd1515);
 }
-a:hover span:nth-child(2) {
+.fejlec a:hover span:nth-child(2) {
   top: 100%;
   transition: 1s;
   transition-delay: 0.25s;
 }
 /* BAL OLDAL */
-a span:nth-child(4) {
+.fejlec a span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
   height: 100%;
   background: linear-gradient(360deg, transparent, #e460b4);
 }
-a:hover span:nth-child(4) {
+.fejlec a:hover span:nth-child(4) {
   bottom: 100%;
   transition: 1s;
   transition-delay: 0.75s;
 }
 /* OLDAL */
 body {
-  background: linear-gradient(-45deg, #3cb9fc, #c6bdea, #8a2be2, #120052);
+  background: linear-gradient(-45deg, #3cb9fc, #c6bdea, #ad68ed, #120052);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
+}
+
+.foTartalom {
+  display: flex;
+  justify-content: center;
+}
+img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.doboz {
+  margin-top: 40px;
+  width: 50%;
+
+  justify-content: center;
+  text-align: center;
+}
+.doboz p {
+  padding: 0;
+  margin: 0;
+  font-size: larger;
+}
+
+.megnezem {
+  box-shadow: 3px 4px 0px 0px #8a2a21;
+  background: linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+  background-color: #c62d1f;
+  border-radius: 18px;
+  border: 1px solid #f01d0e;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  padding: 7px 25px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #810e05;
+}
+.megnezem:hover {
+  background: linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+  background-color: #f24437;
+}
+.megnezem:active {
+  position: relative;
+  top: 1px;
 }
 
 @keyframes gradient {
