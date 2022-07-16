@@ -1,105 +1,286 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="stylesheet" href="style.css"> 
- <title>HTML CSS Portfolio</title>
+<title>Életrevaló</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
+}
+
+/* háttér effekt */
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/*Első kép */
+.bgimg-1 {
+  background-image: url('/img/elso.jpg');
+  min-height: 100%;
+}
+
+/* második kép */
+.bgimg-2 {
+  background-image: url("/img/masodik.jpeg");
+  min-height: 400px;
+}
+
+/* harmadik kép */
+.bgimg-3 {
+  background-image: url("/img/harmadik.jpg");
+  min-height: 400px;
+}
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+/* telefon háttér */
+@media only screen and (max-device-width: 1600px) {
+  .bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: scroll;
+    min-height: 400px;
+  }
+}
+</style>
 </head>
-
 <body>
- 
-<!-- Hero Section -->
- <section id="hero">
-  <div class="fejlec">
-    <p>Home</p>
-    <a href="./aboutme/aboutme.html">About me</a>
-    <p id="contact">Contact</p>
+
+<!-- Navbar  -->
+<div class="w3-top">
+  <div class="w3-bar" id="myNavbar">
+    <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <a href="#home" class="w3-bar-item w3-button"><i class="fa fa-home"></i> HOME</a>
+    <a href="#about" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> Rólam</a>
+    <a href="#portfolio" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> PORTFOLIO</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> Elérhetőség</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+      <i class="fa fa-search"></i>
+    </a>
   </div>
-   <div class="hero container"> 
-    <div>
-     <h1>Hello, <span></span></h1>
-     <h1>My Name is <span></span></h1>
-     <h1>Tamás <span></span></h1>
-     <a href="./portfolio/portfolio.html" type="button" class="cta">Portfolio</a>
+
+  <!-- Navbar telefon -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+    <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">Rólam</a>
+    <a href="#portfolio" class="w3-bar-item w3-button" onclick="toggleFunction()">PORTFOLIO</a>
+    <a href="#contact" class="w3-bar-item w3-button" onclick="toggleFunction()">Elérhetőség</a>
+
+  </div>
+</div>
+
+<!-- első kép logóval -->
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">Életrevaló <span class="w3-hide-small"></span> </span>
+  </div>
+</div>
+
+<!-- Container (About Section) -->
+<div class="w3-content w3-container w3-padding-64" id="about">
+  <h3 class="w3-center">Rólam</h3>
+  <p class="w3-center"><em>Lorem, ipsum dolor.</em></p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae corrupti quos tempora quia aut, error sunt libero sed enim repellat delectus laboriosam. Accusantium tempora ipsum libero odio debitis id corporis eligendi commodi. Est ad repellendus aperiam alias id dolorem pariatur numquam atque hic, officia rerum facilis quod harum quam distinctio!</p>
+  <div class="w3-row">
+    <div class="w3-col m6 w3-center w3-padding-large">
+      <p><b><i class="fa fa-user w3-margin-right"></i>Nevem</b></p><br>
+      <img src="/img/dummy.png" class="w3-round w3-image w3-opacity w3-hover-opacity-off" alt="Egy kép rólam" width="500" height="333">
     </div>
-   </div>
 
- </section>
-<!-- End Hero Section -->
-<!-- Service Section -->
-  <section id="beuszo">
-    <div class="beuszoMain">
-       <div class="beuszoDoboz">
-        <div class="betuk">S</div>
-       </div>
-       <div class="beuszoDoboz">
-        <div class="betuk">E</div>
-      </div>
-      <div class="beuszoDoboz">
-        <div class="betuk">R</div>
-      </div>
-      <div class="beuszoDoboz">
-        <div class="betuk">V</div>
-      </div>
-      <div class="beuszoDoboz">
-        <div id="vorosI" class="betuk">I</div>
-      </div>
-      <div class="beuszoDoboz">
-        <div class="betuk">C</div>
-      </div>
-      <div class="beuszoDoboz">
-        <div class="betuk">E</div>
-      </div>
-      <div class="beuszoDoboz">
-        <div class="betuk">S</div>
-       </div>
+    <!-- Hide this text on small devices -->
+    <div class="w3-col m6 w3-hide-small w3-padding-large">
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit laudantium deserunt, sunt sed aspernatur nesciunt voluptatem, libero architecto accusamus quasi odio sit ut dolores eius nam error sint, eveniet omnis maxime quos dolore blanditiis tenetur. Accusamus in eum iusto officiis iure quisquam nam excepturi, quaerat optio totam minima? Totam error adipisci, aspernatur sequi et tenetur similique repellendus at omnis dolor!</p>
     </div>
-  </section>
-
-
-
-
-<section id="services">
-<div class="services container">
-<div class="service-top">
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo praesentium voluptate blanditiis dolorem odit doloribus mollitia atque officiis quo rerum?</p>
-</div>
-<div class="service-bottom">
-<div class="service-item">
-  <img src="https://img.icons8.com/ios-filled/50/000000/programming.png"/>
-
-<h2>Web Design</h2>
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque quos libero porro omnis. Repudiandae praesentium accusamus debitis natus incidunt necessitatibus?</p>
+  </div>
+  <p class="w3-large w3-center w3-padding-16">skillek:</p>
+  <p class="w3-wide"><i class="fa fa-phone"></i>Kommunikáció</p>
+  <div class="w3-light-grey">
+    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:90%">90%</div>
+  </div>
+  <p class="w3-wide"><i class="fa fa-cog"></i>Lovak</p>
+  <div class="w3-light-grey">
+    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:85%">85%</div>
+  </div>
+  <p class="w3-wide"><i class="fa fa-photo"></i>Terápia</p>
+  <div class="w3-light-grey">
+    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:75%">75%</div>
+  </div>
 </div>
 
-<div class="service-item">
-  <img src="https://img.icons8.com/ios-filled/50/000000/programming.png"/>
+<div class="w3-row w3-center w3-dark-grey w3-padding-16">
+  <div class="w3-quarter w3-section">
+    <span class="w3-xlarge">14+</span><br>
+    Partnerek
+  </div>
+  <div class="w3-quarter w3-section">
+    <span class="w3-xlarge">55+</span><br>
+    akármi
+  </div>
+  <div class="w3-quarter w3-section">
+    <span class="w3-xlarge">89+</span><br>
+    valami stat
+  </div>
+  <div class="w3-quarter w3-section">
+    <span class="w3-xlarge">150+</span><br>
+    minden
+  </div>
+</div>
 
-<h2>Web Design</h2>
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque quos libero porro omnis. Repudiandae praesentium accusamus debitis natus incidunt necessitatibus?</p>
+<!-- referencia szövege -->
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+    <span class="w3-xxlarge w3-text-white w3-wide">Referencia</span>
+  </div>
 </div>
+
+<!-- referenciák -->
+<div class="w3-content w3-container w3-padding-64" id="portfolio">
+  <h3 class="w3-center">Referencia</h3>
+  <p class="w3-center"><em>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, inventore?<br> Kattolj a képekre</em></p><br>
+
+  <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
+  <div class="w3-row-padding w3-center">
+    <div class="w3-col m3">
+      <img src="/w3images/p1.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="The mist over the mountains">
+    </div>
+
+    <div class="w3-col m3">
+      <img src="/w3images/p2.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Coffee beans">
+    </div>
+
+    <div class="w3-col m3">
+      <img src="/w3images/p3.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Bear closeup">
+    </div>
+
+    <div class="w3-col m3">
+      <img src="/w3images/p4.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Quiet ocean">
+    </div>
+  </div>
+
+  <div class="w3-row-padding w3-center w3-section">
+    <div class="w3-col m3">
+      <img src="/w3images/p5.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="The mist">
+    </div>
+
+    <div class="w3-col m3">
+      <img src="/w3images/p6.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="My beloved typewriter">
+    </div>
+
+    <div class="w3-col m3">
+      <img src="/w3images/p7.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Empty ghost train">
+    </div>
+
+    <div class="w3-col m3">
+      <img src="/w3images/p8.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Sailing">
+    </div>
+    <button class="w3-button w3-padding-large w3-light-grey" style="margin-top:64px">Mutass többet</button>
+  </div>
 </div>
+
+<!-- max felbontású képek-->
+<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+  <span class="w3-button w3-large w3-black w3-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
+  <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+    <img id="img01" class="w3-image">
+    <p id="caption" class="w3-opacity w3-large"></p>
+  </div>
 </div>
+
+<!-- Third Parallax Image with Portfolio Text -->
+<div class="bgimg-3 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+     <span class="w3-xxlarge w3-text-white w3-wide">Elérhetőség</span>
+  </div>
 </div>
+
+<!-- Container (Contact Section) -->
+<div class="w3-content w3-container w3-padding-64" id="contact">
+  <h3 class="w3-center">Hol dolgozom</h3>
+  <p class="w3-center"><em>Hagyj visszajelzést!</em></p>
+
+  <div class="w3-row w3-padding-32 w3-section">
+    <div class="w3-col m4 w3-container">
+      
+    </div>
+    <div class="w3-col m8 w3-panel">
+      <div class="w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Debrecen<br>
+        <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Telefon: +30 151515<br>
+        <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: mail@mail.com<br>
+      </div>
+
+      <form action="/action_page.php" target="_blank">
+        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Név" required name="Name">
+          </div>
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+          </div>
+        </div>
+        <input class="w3-input w3-border" type="text" placeholder="Üzenet" required name="Message">
+        <button class="w3-button w3-black w3-right w3-section" type="submit">
+          <i class="fa fa-paper-plane"></i> KÜLDÉS
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
-</section>
+
+<!-- lábjegyzék -->
+<footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>Ugrás</a>
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
   
+</footer>
+<script>
+    // gallery
+    function onClick(element) {
+      document.getElementById("img01").src = element.src;
+      document.getElementById("modal01").style.display = "block";
+      var captionText = document.getElementById("caption");
+      captionText.innerHTML = element.alt;
+    }
+    
+    // navbar scroll
+    window.onscroll = function() {myFunction()};
+    function myFunction() {
+        var navbar = document.getElementById("myNavbar");
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+        } else {
+            navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+        }
+    }
+    
+    // Used to toggle the menu on small screens when clicking on the menu button
+    function toggleFunction() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+    </script>
 
 
-
-<!-- End of service section -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
