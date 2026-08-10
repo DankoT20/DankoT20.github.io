@@ -1,492 +1,298 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Életrevaló</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Lato"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <style>
-      body,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: "Lato", sans-serif;
-      }
-      body,
-      html {
-        height: 100%;
-        color: 	#a59c9d;
-        line-height: 1.8;
-      }
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090b10">
+<title>PEFKO '26</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;600;700&display=swap');
+:root{--ink:#090b10;--paper:#f2eadb;--acid:#dfff00;--orange:#ff5a1f;--blue:#29c8ff;--pink:#ff3d88}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:#fff;font-family:"DM Sans",Arial,sans-serif;overflow-x:hidden}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.055;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+.display{font-family:"Archivo Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:-.055em}
+.hero{min-height:100svh;position:relative;display:flex;align-items:flex-end;overflow:hidden;background:#111}
+.hero:before{content:"";position:absolute;inset:0;background:
+radial-gradient(circle at 78% 22%,rgba(255,90,31,.48),transparent 24%),
+radial-gradient(circle at 20% 75%,rgba(41,200,255,.18),transparent 28%),
+linear-gradient(135deg,#111827 0%,#10131a 38%,#33130d 72%,#090b10 100%);
+transform:scale(1.02)}
+.hero:after{content:"";position:absolute;width:70vw;height:70vw;border:1px solid rgba(255,255,255,.22);border-radius:50%;right:-24vw;top:-30vw}
+.top{position:absolute;z-index:3;top:24px;left:4vw;right:4vw;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:12px;letter-spacing:.12em}
+.pill{border:1px solid rgba(255,255,255,.45);padding:9px 13px;border-radius:999px;backdrop-filter:blur(8px);background:#0003}
+.hero-inner{position:relative;z-index:2;width:min(1400px,92vw);margin:0 auto;padding:0 0 5vh}
+.kicker{font-weight:700;letter-spacing:.16em;font-size:12px;margin-bottom:10px}
+h1{font-size:clamp(72px,16vw,230px);line-height:.7;margin:0}
+h1 .outline{display:block;color:transparent;-webkit-text-stroke:2px #fff}
+.date{display:flex;align-items:center;gap:16px;margin-top:28px;font-size:clamp(20px,3vw,42px);font-weight:700}
+.date i{display:block;width:70px;height:2px;background:var(--acid)}
+.sticker{position:absolute;z-index:4;right:6vw;bottom:19vh;background:var(--acid);color:#090b10;padding:18px 22px;font-family:"Archivo Black";font-size:clamp(18px,2.5vw,34px);transform:rotate(6deg);box-shadow:8px 8px 0 var(--orange)}
+.marquee{background:var(--acid);color:#090b10;overflow:hidden;white-space:nowrap;padding:12px 0;font-family:"Archivo Black";font-size:16px;transform:rotate(-1deg);margin:-4px -10px 0}
+.track{display:inline-block;animation:move 18s linear infinite}@keyframes move{to{transform:translateX(-50%)}}
+.wrap{width:min(1180px,90vw);margin:auto}
+.count-section{padding:90px 0 60px}
+.label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9da3aa;font-weight:700}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #333;border-bottom:1px solid #333;margin-top:18px}
+.unit{padding:26px 10px 22px;border-right:1px solid #333}.unit:last-child{border:0}
+.unit strong{font-family:"Archivo Black";display:block;font-size:clamp(48px,9vw,110px);line-height:1}.unit span{font-size:11px;color:#9299a1;text-transform:uppercase;letter-spacing:.15em}
+.lost{padding:70px 0 120px}
+.lost-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:0}
+.photo{position:relative;transform:rotate(-2deg);z-index:2}
+.photo img{width:100%;display:block;filter:saturate(1.05) contrast(1.04);box-shadow:0 30px 80px #0008}
+.photo:before{content:"TAVALY";position:absolute;z-index:3;top:-18px;left:30px;background:var(--paper);color:#111;padding:9px 18px;font-weight:900;transform:rotate(-4deg)}
+.lost-copy{margin-left:-4vw;z-index:3;position:relative}
+.lost-copy h2{font-size:clamp(70px,13vw,180px);line-height:.68;margin:0}
+.lost-copy h2 span{display:block;color:var(--orange);transform:translateX(7vw)}
+.lost-copy .mini{margin:38px 0 0 7vw;font-weight:700;font-size:18px}
+.lost-copy .mini b{color:var(--acid)}
+.vibes{background:var(--paper);color:#0c0d10;padding:100px 0;position:relative;overflow:hidden}
+.vibes:before{content:"PEFKO";position:absolute;font-family:"Archivo Black";font-size:30vw;color:#000;opacity:.035;left:-2vw;top:-8vw}
+.vibes h2{font-size:clamp(55px,10vw,140px);line-height:.75;margin:0 0 60px;position:relative}
+.vibe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;position:relative}
+.vibe{min-height:230px;padding:24px;border:2px solid #111;display:flex;flex-direction:column;justify-content:space-between;transition:.2s}
+.vibe:nth-child(2){background:var(--blue);transform:translateY(24px) rotate(1deg)}.vibe:nth-child(3){background:var(--orange);transform:rotate(-1deg)}
+.vibe:hover{transform:translateY(-8px) rotate(-1deg)}
+.vibe .icon{font-size:44px}.vibe b{font-family:"Archivo Black";font-size:27px;text-transform:uppercase}
+.rules{padding:110px 0}
+.rules-head{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #333;padding-bottom:24px;margin-bottom:0}
+.rules-head h2{font-size:clamp(50px,9vw,120px);line-height:.8;margin:0}
+.rule{display:grid;grid-template-columns:80px 1fr auto;align-items:center;border-bottom:1px solid #333;padding:28px 0;font-size:clamp(18px,2.3vw,30px);font-weight:700}
+.rule .n{color:var(--acid);font-family:"Archivo Black"}.rule .emoji{font-size:30px}
+.final{min-height:75svh;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;background:var(--orange);color:#090b10}
+.final:before,.final:after{content:"";position:absolute;border:2px solid #090b10;border-radius:50%;width:45vw;height:45vw}.final:before{left:-22vw;top:-20vw}.final:after{right:-22vw;bottom:-22vw}
+.final h2{font-size:clamp(80px,18vw,240px);line-height:.68;margin:0;position:relative;z-index:2}
+.final p{font-weight:900;letter-spacing:.18em;margin-top:35px;position:relative;z-index:2}
+.tap{position:relative;z-index:2;margin-top:28px;border:2px solid #090b10;background:transparent;padding:14px 20px;font-weight:900;cursor:pointer}
+@media(max-width:760px){
+ .hero:before{background-position:58% center}.top{top:16px}.top>span:last-child{display:none}.sticker{right:7vw;bottom:24vh}
+ .count-section{padding-top:65px}.countdown{grid-template-columns:repeat(2,1fr)}.unit:nth-child(2){border-right:0}.unit:nth-child(-n+2){border-bottom:1px solid #333}
+ .lost{padding:60px 0 90px}.lost-grid{grid-template-columns:1fr}.lost-copy{margin:-22px 0 0}.lost-copy h2 span{transform:translateX(15vw)}.lost-copy .mini{margin-left:15vw}
+ .vibes{padding:75px 0}.vibe-grid{grid-template-columns:1fr 1fr}.vibe{min-height:170px}.vibe:nth-child(2){transform:translateY(12px)}
+ .rules{padding:80px 0}.rules-head{display:block}.rule{grid-template-columns:50px 1fr}.rule .emoji{display:none}
+}
 
-      /* háttér effekt */
-      .bgimg-1,
-      .bgimg-2,
-      .bgimg-3 {
-        background-attachment: fixed;
+.hero .burn{position:absolute;z-index:1;right:-1vw;top:16vh;font-family:"Archivo Black",Impact,sans-serif;
+font-size:clamp(62px,13vw,190px);line-height:.72;text-align:right;color:rgba(255,255,255,.10);
+-webkit-text-stroke:1px rgba(255,255,255,.24);transform:rotate(90deg) translateX(45%);transform-origin:right top;
+pointer-events:none;white-space:nowrap}
+.motto-tag{display:inline-block;margin-top:22px;background:#fff;color:#090b10;padding:9px 13px;font-size:11px;
+font-weight:900;letter-spacing:.16em;transform:rotate(-1deg)}
+@media(max-width:760px){.hero .burn{display:none}}
 
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
+.places{padding:110px 0;background:#0d1016;position:relative;overflow:hidden}
+.places:before{content:"PEFKO NIGHTS";position:absolute;left:-2vw;top:1vw;font-family:"Archivo Black",Impact,sans-serif;font-size:17vw;color:#fff;opacity:.025;white-space:nowrap}
+.places-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:42px;position:relative}
+.places-head h2{font-size:clamp(52px,9vw,120px);line-height:.78;margin:0}
+.places-head p{max-width:360px;color:#9fa6af;margin:0;font-size:14px}
+.place-group{margin-top:52px;position:relative}
+.place-kicker{display:flex;align-items:center;gap:12px;font-family:"Archivo Black";font-size:18px;margin-bottom:18px;text-transform:uppercase}
+.place-kicker:after{content:"";height:1px;background:#343943;flex:1}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{position:relative;min-height:250px;border:1px solid #30343d;padding:22px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:linear-gradient(150deg,#141820,#0b0e13);transition:.2s ease}
+.card:before{content:"";position:absolute;width:140px;height:140px;border-radius:50%;background:var(--acid);filter:blur(65px);opacity:.08;right:-60px;top:-60px}
+.card:hover{transform:translateY(-6px);border-color:#69717e}
+.card .type{font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:#8f97a1;font-weight:800}
+.card h3{font-family:"Archivo Black";font-size:28px;line-height:.95;text-transform:uppercase;margin:18px 0 10px}
+.card p{margin:0;color:#afb5bc;font-size:13px;line-height:1.5}
+.card a{display:inline-flex;align-items:center;gap:8px;margin-top:22px;color:#0a0c10;background:var(--acid);text-decoration:none;font-weight:900;font-size:11px;letter-spacing:.08em;padding:11px 13px;width:max-content;text-transform:uppercase}
+.card.hot{border-color:#4c4021}
+.card.hot h3{color:var(--acid)}
+.card.night:before{background:var(--pink);opacity:.12}
+.card.night a{background:var(--pink);color:white}
+.places-note{margin-top:24px;color:#747b84;font-size:11px}
+@media(max-width:900px){.cards{grid-template-columns:1fr 1fr}.places-head{display:block}.places-head p{margin-top:20px}}
+@media(max-width:560px){.places{padding:78px 0}.cards{grid-template-columns:1fr}.card{min-height:210px}}
 
-      /*Első kép */
-      .bgimg-1 {
-        background-image: url("/img/elso.jpg");
-        min-height: 100%;
-      }
 
-      /* második kép */
-      .bgimg-2 {
-        background-image: url("/img/masodik.jpeg");
-        min-height: 400px;
-      }
+/* MOBILE SAFETY PASS */
+img,svg,video,canvas{max-width:100%;height:auto}
+.wrap,.hero-inner,.places-head,.cards,.card,.rule,.date,.top>*{min-width:0}
+.card h3,.card p,.rule span,.places-head p,.date span,.kicker,.motto-tag{overflow-wrap:anywhere;word-break:normal}
+@media(max-width:760px){
+  .hero{min-height:92svh}
+  .hero-inner{width:88vw;padding-bottom:7vh}
+  h1{font-size:clamp(54px,19vw,86px);line-height:.76;max-width:100%}
+  h1 .outline{-webkit-text-stroke:1.5px #fff}
+  .kicker{font-size:10px;line-height:1.4;letter-spacing:.12em;max-width:72vw}
+  .date{gap:10px;margin-top:20px;font-size:clamp(15px,4.8vw,20px);line-height:1.15;align-items:flex-start;max-width:82vw}
+  .date i{width:28px;min-width:28px;margin-top:.55em}
+  .date span{display:block}
+  .motto-tag{font-size:9px;letter-spacing:.12em;max-width:78vw;line-height:1.35}
+  .sticker{right:5vw;bottom:21vh;padding:12px 14px;font-size:16px;box-shadow:5px 5px 0 var(--orange)}
+  .top{left:5vw;right:5vw}.pill{font-size:10px;padding:7px 10px;letter-spacing:.08em;max-width:80vw}
+  .marquee{font-size:13px;padding:10px 0}
+  .wrap{width:88vw}
+  .unit{padding:20px 8px 18px}.unit strong{font-size:clamp(42px,16vw,66px)}
+  .vibes h2,.rules-head h2,.places-head h2{font-size:clamp(48px,16vw,72px);line-height:.78;max-width:100%}
+  .vibe-grid{grid-template-columns:1fr 1fr;gap:8px}.vibe{padding:18px;min-height:150px}.vibe b{font-size:20px}.vibe .icon{font-size:34px}
+  .rule{grid-template-columns:42px minmax(0,1fr);gap:8px;padding:22px 0;font-size:clamp(16px,5vw,20px);line-height:1.25}
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .card{width:100%;min-height:0;padding:20px}.card h3{font-size:25px}.card a{max-width:100%;white-space:normal}
+  .places-head p{max-width:100%;line-height:1.5}
+  .final{min-height:65svh;padding:60px 5vw}.final h2{font-size:clamp(72px,25vw,120px);max-width:100%}.final p{font-size:12px;letter-spacing:.12em;overflow-wrap:anywhere}
+}
+@media(max-width:390px){
+  h1{font-size:clamp(50px,18vw,70px)}
+  .sticker{bottom:23vh;font-size:14px}
+  .date{font-size:14px;max-width:88vw}
+  .vibes h2,.rules-head h2,.places-head h2{font-size:clamp(44px,15vw,62px)}
+  .vibe-grid{grid-template-columns:1fr}
+  .vibe:nth-child(2),.vibe:nth-child(3){transform:none}
+}
 
-      /* harmadik kép */
-      .bgimg-3 {
-        background-image: url("/img/harmadik.jpg");
-        min-height: 400px;
-      }
+</style>
+</head>
+<body>
+<header class="hero"><div class="burn">GYROS LOST</div>
+ <div class="top"><span class="pill">🇬🇷 PEFKOCHORI / GR</span><span>20.08.2026 — 29.08.2026</span></div>
+ <div class="sticker">8 BARÁT<br>1 NYÁR</div>
+ <div class="hero-inner">
+  <div class="kicker">PEFKOCHORI 2026 / HIVATALOS MOTTÓ</div>
+  <h1 class="display">GYROS<span class="outline">LOST</span></h1>
+  <div class="date"><i></i><span>PEFKOCHORI • 08.20. → INDULÁS</span></div><div class="motto-tag">AZ IDEI NYÁR MOTTÓJA</div>
+ </div>
+</header>
 
-      .w3-wide {
-        letter-spacing: 10px;
-      }
-      .w3-hover-opacity {
-        cursor: pointer;
-      }
+<div class="marquee"><div class="track">GYROS LOST ✦ PEFKOCHORI 2026 ✦ GYROS LOST ✦ 08.20. ✦ GYROS LOST ✦ PEFKOCHORI 2026 ✦ GYROS LOST ✦ 08.20. ✦ </div></div>
 
-      /* telefon háttér */
-      @media only screen and (max-device-width: 1600px) {
-        .bgimg-1,
-        .bgimg-2,
-        .bgimg-3 {
-          background-attachment: scroll;
-          min-height: 400px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navbar  -->
-    <div class="w3-top">
-      <div class="w3-bar" id="myNavbar">
-        <a
-          class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right"
-          href="javascript:void(0);"
-          onclick="toggleFunction()"
-          title="Toggle Navigation Menu"
-        >
-          <i class="fa fa-bars"></i>
-        </a>
-        <a href="#home" class="w3-bar-item w3-button"
-          ><i class="fa fa-home"></i> HOME</a
-        >
-        <a href="#about" class="w3-bar-item w3-button w3-hide-small"
-          ><i class="fa fa-user"></i> Rólam</a
-        >
-        <a href="#portfolio" class="w3-bar-item w3-button w3-hide-small"
-          ><i class="fa fa-th"></i> Referencia</a
-        >
-        <a href="#contact" class="w3-bar-item w3-button w3-hide-small"
-          ><i class="fa fa-envelope"></i> Elérhetőség</a
-        >
-        <a
-          href="#"
-          class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"
-        >
-          <i class="fa fa-search"></i>
-        </a>
-      </div>
+<section class="count-section"><div class="wrap">
+ <div class="label">INDULÁSIG</div>
+ <div class="countdown">
+  <div class="unit"><strong id="d">00</strong><span>nap</span></div>
+  <div class="unit"><strong id="h">00</strong><span>óra</span></div>
+  <div class="unit"><strong id="m">00</strong><span>perc</span></div>
+  <div class="unit"><strong id="s">00</strong><span>másodperc</span></div>
+ </div>
+</div></section>
 
-      <!-- Navbar telefon -->
-      <div
-        id="navDemo"
-        class="w3-bar-block w3-light-gray w3-hide w3-hide-large w3-hide-medium"
-      >
-        <a
-          href="#about"
-          class="w3-bar-item w3-button"
-          onclick="toggleFunction()"
-          >Rólam</a
-        >
-        <a
-          href="#portfolio"
-          class="w3-bar-item w3-button"
-          onclick="toggleFunction()"
-          >PORTFOLIO</a
-        >
-        <a
-          href="#contact"
-          class="w3-bar-item w3-button"
-          onclick="toggleFunction()"
-          >Elérhetőség</a
-        >
-      </div>
+
+
+<section class="vibes"><div class="wrap">
+ <h2 class="display">ENNYI<br>A TERV.</h2>
+ <div class="vibe-grid">
+  <div class="vibe"><span class="icon">🌊</span><b>Tenger</b></div>
+  <div class="vibe"><span class="icon">🌅</span><b>Naplemente</b></div>
+  <div class="vibe"><span class="icon">🥙</span><b>Gyros</b></div>
+  <div class="vibe"><span class="icon">🌙</span><b>Éjszaka</b></div>
+ </div>
+</div></section>
+
+<section class="rules"><div class="wrap">
+ <div class="rules-head"><h2 class="display">ALAP<br>SZABÁLYOK</h2><div class="label">NEM HIVATALOS</div></div>
+ <div class="rule"><span class="n">01</span><span>Fürdőruha. Mindig.</span><span class="emoji">🌊</span></div>
+ <div class="rule"><span class="n">02</span><span>„Ezt még elszívom, ezt még megiszom.”</span><span class="emoji">🥃</span></div>
+ <div class="rule"><span class="n">03</span><span>Doktorúr keverjen egy whiskey-colát.</span><span class="emoji">🥃</span></div>
+ <div class="rule"><span class="n">04</span><span>Egy normális közös kép azért legyen.</span><span class="emoji">📸</span></div>
+ <div class="rule"><span class="n">05</span><span>GYROS LOST.</span><span class="emoji">🥙</span></div>
+</div></section>
+
+
+<section class="places">
+  <div class="wrap">
+    <div class="places-head">
+      <h2 class="display">HOVA<br>MENJÜNK?</h2>
+      <p>Nem útikönyv. Csak pár hely, amit érdemes elmenteni, aztán majd este eldől minden.</p>
     </div>
 
-    <!-- első kép logóval -->
-    <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
-      <div class="w3-display-middle" style="white-space: nowrap">
-        <span
-          class="w3-center w3-padding-large w3-brown w3-xlarge w3-wide w3-animate-opacity"
-          >Életrevaló <span class="w3-hide-small"></span>
-        </span>
-      </div>
-    </div>
-
-    <!-- Container (About Section) -->
-    <div class="w3-content w3-container w3-padding-64" id="about">
-      <h2 class="w3-center">Rólam</h2>
-      <p class="w3-center"><em>Lorem, ipsum dolor.</em></p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae corrupti
-        quos tempora quia aut, error sunt libero sed enim repellat delectus
-        laboriosam. Accusantium tempora ipsum libero odio debitis id corporis
-        eligendi commodi. Est ad repellendus aperiam alias id dolorem pariatur
-        numquam atque hic, officia rerum facilis quod harum quam distinctio!
-      </p>
-      <div class="w3-row">
-        <div class="w3-col m6 w3-center w3-padding-large">
-          <p>
-            <b><i class="fa fa-user w3-margin-right"></i>Nevem</b>
-          </p>
-          <br />
-          <img
-            src="/img/dummy.png"
-            class="w3-round w3-image w3-opacity w3-hover-opacity-off"
-            alt="Egy kép rólam"
-            width="500"
-            height="333"
-          />
-        </div>
-
-        <!-- Hide this text on small devices -->
-        <div class="w3-col m6 w3-hide-small w3-padding-large">
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit
-            laudantium deserunt, sunt sed aspernatur nesciunt voluptatem, libero
-            architecto accusamus quasi odio sit ut dolores eius nam error sint,
-            eveniet omnis maxime quos dolore blanditiis tenetur. Accusamus in
-            eum iusto officiis iure quisquam nam excepturi, quaerat optio totam
-            minima? Totam error adipisci, aspernatur sequi et tenetur similique
-            repellendus at omnis dolor!
-          </p>
-        </div>
-      </div>
-      <p class="w3-large w3-center w3-padding-16">skillek:</p>
-      <p class="w3-wide"><i class="fa fa-phone"></i>Kommunikáció</p>
-      <div class="w3-light-grey">
-        <div
-          class="w3-container w3-padding-small w3-dark-grey w3-center"
-          style="width: 90%"
-        >
-          90%
-        </div>
-      </div>
-      <p class="w3-wide"><i class="fa fa-cog"></i>Lovak</p>
-      <div class="w3-light-grey">
-        <div
-          class="w3-container w3-padding-small w3-dark-grey w3-center"
-          style="width: 85%"
-        >
-          85%
-        </div>
-      </div>
-      <p class="w3-wide"><i class="fa fa-photo"></i>Terápia</p>
-      <div class="w3-light-grey">
-        <div
-          class="w3-container w3-padding-small w3-dark-grey w3-center"
-          style="width: 75%"
-        >
-          75%
-        </div>
-      </div>
-    </div>
-
-    <div class="w3-row w3-center w3-dark-grey w3-padding-16">
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">14+</span><br />
-        Partnerek
-      </div>
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">55+</span><br />
-        akármi
-      </div>
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">89+</span><br />
-        valami stat
-      </div>
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">150+</span><br />
-        minden
-      </div>
-    </div>
-
-    <!-- referencia szövege -->
-    <div class="bgimg-2 w3-display-container w3-opacity-min">
-      <div class="w3-display-middle">
-        <span class="w3-xxlarge w3-text-white w3-wide">Referencia</span>
-      </div>
-    </div>
-
-    <!-- referenciák -->
-    <div class="w3-content w3-container w3-padding-64" id="portfolio">
-      <h3 class="w3-center">Referencia</h3>
-      <p class="w3-center">
-        <em
-          >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam,
-          inventore?<br />
-          Kattolj a képekre</em
-        >
-      </p>
-      <br />
-
-      <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
-      <div class="w3-row-padding w3-center">
-        <div class="w3-col m3">
-          <img
-            src="/img/lovalami.jpg"
-            style="width: 100%"
-            onclick="onClick(this)"
-            class="w3-hover-opacity"
-            alt="Kép Címe"
-          />
-        </div>
-
-        <div class="w3-col m3">
-          <img
-            src="/img/lovalami.jpg"
-            style="width: 100%"
-            onclick="onClick(this)"
-            class="w3-hover-opacity"
-            alt="Kép Címe"
-          />
-        </div>
-
-        <div class="w3-col m3">
-          <img
-          src="/img/lovalami.jpg"
-            style="width: 100%"
-            onclick="onClick(this)"
-            class="w3-hover-opacity"
-            alt="Kép Címe"
-          />
-        </div>
-
-        <div class="w3-col m3">
-          <img
-          src="/img/lovalami.jpg"
-            style="width: 100%"
-            onclick="onClick(this)"
-            class="w3-hover-opacity"
-            alt="Kép Címe"
-          />
-        </div>
-      </div>
-
-      <div class="w3-row-padding w3-center w3-section">
-        <div class="w3-col m3">
-          <img
-          src="/img/lovalami.jpg"
-            style="width: 100%"
-            onclick="onClick(this)"
-            class="w3-hover-opacity"
-            alt="Kép Címe"
-          />
-        </div>
-
-        <div class="w3-col m3">
-          <img
-          src="/img/lovalami.jpg"
-            style="width: 100%"
-            onclick="onClick(this)"
-            class="w3-hover-opacity"
-            alt="Kép Címe"
-          />
-        </div>
-
-        <div class="w3-col m3">
-          <img
-          src="/img/lovalami.jpg"
-            style="width: 100%"
-            onclick="onClick(this)"
-            class="w3-hover-opacity"
-            alt="Kép Címe"
-          />
-        </div>
-
-        <div class="w3-col m3">
-          <img
-          src="/img/lovalami.jpg"
-            style="width: 100%"
-            onclick="onClick(this)"
-            class="w3-hover-opacity"
-            alt="Kép Címe"
-          />
-        </div>
-        <button
-          class="w3-button w3-padding-large w3-light-grey"
-          style="margin-top: 64px"
-        >
-          Mutass többet
-        </button>
-      </div>
-    </div>
-
-    <!-- max felbontású képek-->
-    <div
-      id="modal01"
-      class="w3-modal w3-black"
-      onclick="this.style.display='none'"
-    >
-      <span
-        class="w3-button w3-large w3-black w3-display-topright"
-        title="Close Modal Image"
-        ><i class="fa fa-remove"></i
-      ></span>
-      <div
-        class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64"
-      >
-        <img id="img01" class="w3-image" />
-        <p id="caption" class="w3-opacity w3-large"></p>
-      </div>
-    </div>
-
-    <!-- Third Parallax Image with Portfolio Text -->
-    <div class="bgimg-3 w3-display-container w3-opacity-min">
-      <div class="w3-display-middle">
-        <span class="w3-xxlarge w3-text-white w3-wide">Elérhetőség</span>
-      </div>
-    </div>
-
-    <!-- Container (Contact Section) -->
-    <div class="w3-content w3-container w3-padding-64" id="contact">
-      <h3 class="w3-center">Hol dolgozom</h3>
-      <p class="w3-center"><em>Hagyj visszajelzést!</em></p>
-
-      <div class="w3-row w3-padding-32 w3-section">
-        <div class="w3-col m4 w3-container"></div>
-        <div class="w3-col m8 w3-panel">
-          <div class="w3-large w3-margin-bottom">
-            <i
-              class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"
-            ></i>
-            Debrecen<br />
-            <i
-              class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"
-            ></i>
-            Telefon: +30 151515<br />
-            <i
-              class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"
-            ></i>
-            Email: mail@mail.com<br />
+    <div class="place-group">
+      <div class="place-kicker">🥙 KAJA</div>
+      <div class="cards">
+        <article class="card hot">
+          <div>
+            <div class="type">GYROS / KÖTELEZŐ KÖR</div>
+            <h3>Smile</h3>
+            <p>Ha a mottó GYROS LOST, akkor legalább egy komoly gyros-kör kell.</p>
           </div>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Smile+Pefkochori">TÉRKÉP ↗</a>
+        </article>
 
-          <form action="/action_page.php" target="_blank">
-            <div class="w3-row-padding" style="margin: 0 -16px 8px -16px">
-              <div class="w3-half">
-                <input
-                  class="w3-input w3-border"
-                  type="text"
-                  placeholder="Név"
-                  required
-                  name="Name"
-                />
-              </div>
-              <div class="w3-half">
-                <input
-                  class="w3-input w3-border"
-                  type="text"
-                  placeholder="Email"
-                  required
-                  name="Email"
-                />
-              </div>
-            </div>
-            <input
-              class="w3-input w3-border"
-              type="text"
-              placeholder="Üzenet"
-              required
-              name="Message"
-            />
-            <button
-              class="w3-button w3-black w3-right w3-section"
-              type="submit"
-            >
-              <i class="fa fa-paper-plane"></i> KÜLDÉS
-            </button>
-          </form>
-        </div>
+        <article class="card">
+          <div>
+            <div class="type">GÖRÖG / TAVERNA</div>
+            <h3>Ouzeri Tsapari</h3>
+            <p>Tenger gyümölcsei, görög kaják, normális leülős este.</p>
+          </div>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ouzeri+Tsapari+Pefkochori">TÉRKÉP ↗</a>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="type">GÖRÖG / CASUAL</div>
+            <h3>Bistro Greek Food</h3>
+            <p>Lazább görög vacsi, ha nem akarunk túlgondolni semmit.</p>
+          </div>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bistro+Greek+Food+Pefkochori">TÉRKÉP ↗</a>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="type">TENGERPART / VACSORA</div>
+            <h3>Bakalis</h3>
+            <p>Klasszikus tengerparti vacsora, amikor egyszer kulturáltak is vagyunk.</p>
+          </div>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bakalis+Restaurant+Pefkochori">TÉRKÉP ↗</a>
+        </article>
       </div>
     </div>
 
-    <!-- lábjegyzék -->
-    <footer
-      class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off"
-    >
-      <a href="#home" class="w3-button w3-light-grey"
-        ><i class="fa fa-arrow-up w3-margin-right"></i>Ugrás</a
-      >
-      <div class="w3-xlarge w3-section">
-        <i class="fa fa-facebook-official w3-hover-opacity"></i>
-        <i class="fa fa-instagram w3-hover-opacity"></i>
-        <i class="fa fa-snapchat w3-hover-opacity"></i>
-        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-        <i class="fa fa-twitter w3-hover-opacity"></i>
-        <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <div class="place-group">
+      <div class="place-kicker">🌙 ESTE</div>
+      <div class="cards">
+        <article class="card night hot">
+          <div>
+            <div class="type">COCKTAIL / CLUB</div>
+            <h3>Orca</h3>
+            <p>Az egyik legkézenfekvőbb esti kezdőpont Pefkochoriban. Zene, koktél, aztán meglátjuk.</p>
+          </div>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Orca+Cocktail+Bar+Club+Pefkochori">TÉRKÉP ↗</a>
+        </article>
+
+        <article class="card night">
+          <div>
+            <div class="type">BEACH BAR</div>
+            <h3>Fýki</h3>
+            <p>Nappal beach, naplementénél ital, este már könnyen más lesz a terv.</p>
+          </div>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Fyki+Beach+Bar+Pefkochori">TÉRKÉP ↗</a>
+        </article>
+
+        <article class="card night">
+          <div>
+            <div class="type">BEACH BAR</div>
+            <h3>Akrotiri</h3>
+            <p>Tengerparti italos opció, ha nem akarunk rögtön klubba beesni.</p>
+          </div>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Akrotiri+Beach+Bar+Pefkochori">TÉRKÉP ↗</a>
+        </article>
+
+        <article class="card night">
+          <div>
+            <div class="type">BEACH / PARTY</div>
+            <h3>Umbrellas</h3>
+            <p>Napközben chill, később már jóval kevésbé chill.</p>
+          </div>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Umbrellas+Beach+Bar+Pefkochori">TÉRKÉP ↗</a>
+        </article>
       </div>
-    </footer>
-    <script>
-      // gallery
-      function onClick(element) {
-        document.getElementById("img01").src = element.src;
-        document.getElementById("modal01").style.display = "block";
-        var captionText = document.getElementById("caption");
-        captionText.innerHTML = element.alt;
-      }
+    </div>
 
-      // navbar scroll
-      window.onscroll = function () {
-        myFunction();
-      };
-      function myFunction() {
-        var navbar = document.getElementById("myNavbar");
-        if (
-          document.body.scrollTop > 100 ||
-          document.documentElement.scrollTop > 100
-        ) {
-          navbar.className =
-            "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
-        } else {
-          navbar.className = navbar.className.replace(
-            " w3-card w3-animate-top w3-white",
-            ""
-          );
-        }
-      }
+    <div class="places-note">A nyitvatartás és az esti program változhat — indulás előtt rá kell nézni.</div>
+  </div>
+</section>
 
-      // Used to toggle the menu on small screens when clicking on the menu button
-      function toggleFunction() {
-        var x = document.getElementById("navDemo");
-        if (x.className.indexOf("w3-show") == -1) {
-          x.className += " w3-show";
-        } else {
-          x.className = x.className.replace(" w3-show", "");
-        }
-      }
-      console.log("Kész van minden")
-    </script>
-  </body>
-</html>
+<section class="final">
+ <div>
+  <h2 class="display">10<br>NAP.</h2>
+  <p>PEFKO '26 • 08.20.</p>
+  <button class="tap" onclick="blast()">MEHET 🍻</button>
+ </div>
+</section>
+
+<script>
+const target=new Date('2026-08-20T00:00:00+02:00').getTime();
+function tick(){let x=Math.max(0,target-Date.now()),d=Math.floor(x/864e5);x%=864e5;let h=Math.floor(x/36e5);x%=36e5;let m=Math.floor(x/6e4);x%=6e4;let s=Math.floor(x/1e3);d=document.getElementById('d').textContent=String(d).padStart(2,'0');document.getElementById('h').textContent=String(h).padStart(2,'0');document.getElementById('m').textContent=String(m).padStart(2,'0');document.getElementById('s').textContent=String(s).padStart(2,'0')}
+tick();setInterval(tick,1000);
+function blast(){for(let i=0;i<36;i++){let e=document.createElement('div');e.textContent=['🥙','🍻','🌊','🇬🇷','🔥'][Math.floor(Math.random()*5)];Object.assign(e.style,{position:'fixed',left:Math.random()*100+'vw',top:'-40px',fontSize:20+Math.random()*25+'px',zIndex:999,pointerEvents:'none',transition:'transform 2.2s ease-in,opacity 2.2s'});document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translateY(115vh) rotate(${Math.random()*900}deg)`;e.style.opacity='0'});setTimeout(()=>e.remove(),2300)}}
+</script>
+</body></html>
