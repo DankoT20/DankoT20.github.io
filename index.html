@@ -359,6 +359,78 @@ footer{padding:clamp(28px,6vw,44px) var(--gut);text-align:center;color:var(--ink
 }
 @keyframes hull{to{transform:translateY(620px) rotate(560deg);opacity:0}}
 
+/* ============ cinematikus intro ============ */
+#intro{
+  position:fixed;inset:0;z-index:100;overflow:hidden;isolation:isolate;
+  background:#06171A;color:#F4F7F4;display:grid;place-items:center;
+  transition:opacity 1s ease,transform 1.2s cubic-bezier(.6,0,.2,1),filter 1s ease;
+}
+#intro.megy{opacity:0;transform:scale(1.07);filter:blur(6px);pointer-events:none}
+.intro-hatter{position:absolute;inset:0;z-index:-2}
+.intro-hatter img{
+  width:100%;height:100%;object-fit:cover;
+  animation:introKep 5.6s cubic-bezier(.3,0,.2,1) forwards;
+}
+@keyframes introKep{
+  0%{opacity:0;filter:blur(30px) saturate(.4);transform:scale(1.24)}
+  35%{opacity:.32}
+  100%{opacity:.66;filter:blur(3px) saturate(1);transform:scale(1.02)}
+}
+#intro::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(125% 85% at 50% 48%,rgba(6,23,26,.2),rgba(6,23,26,.94));
+}
+.intro-horizont{
+  position:absolute;left:8%;right:8%;top:50%;height:1px;z-index:0;
+  background:linear-gradient(90deg,transparent,#EBCB86,transparent);
+  transform:scaleX(0);transform-origin:center;
+  animation:introVonal 1.7s .2s cubic-bezier(.2,.85,.2,1) forwards,
+            introVonalEl 1s 2.2s ease forwards;
+}
+@keyframes introVonal{to{transform:scaleX(1)}}
+@keyframes introVonalEl{to{opacity:0}}
+.intro-tartalom{
+  position:relative;z-index:1;display:grid;justify-items:center;gap:16px;
+  text-align:center;padding-inline:24px;
+}
+.intro-eyebrow{
+  font-family:var(--f-util);font-size:.64rem;font-weight:700;
+  letter-spacing:.36em;text-transform:uppercase;color:#EBCB86;
+  margin:0;opacity:0;animation:introFel 1s 1s ease forwards;
+}
+.intro-cim{
+  font-family:var(--f-display);font-weight:400;margin:0;
+  font-size:clamp(2.9rem,13.5vw,6.6rem);line-height:.96;letter-spacing:.005em;
+}
+.intro-cim span{
+  display:inline-block;opacity:0;
+  transform:translateY(.55em) scale(.94);filter:blur(10px);
+  animation:introBetu 1s cubic-bezier(.16,.9,.2,1) forwards;
+}
+@keyframes introBetu{to{opacity:1;transform:none;filter:blur(0)}}
+.intro-meander{width:clamp(120px,32vw,210px);opacity:0;animation:introFel .9s 3s ease forwards}
+.intro-meander .meander{background-color:#EBCB86;opacity:1}
+.intro-alcim{
+  font-family:var(--f-util);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#BFD0CC;margin:0;opacity:0;animation:introFel 1s 3.3s ease forwards;
+}
+@keyframes introFel{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.intro-toltes{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.1)}
+.intro-toltes i{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,#2FA3A8,#EBCB86);
+  animation:introToltes 5s cubic-bezier(.45,0,.2,1) forwards;
+}
+@keyframes introToltes{0%{width:0}30%{width:34%}62%{width:66%}100%{width:100%}}
+#intro-skip{
+  position:absolute;right:16px;top:calc(14px + env(safe-area-inset-top,0px));z-index:2;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.22);border-radius:99px;
+  color:#CFDCD8;font-family:var(--f-util);font-size:.6rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;padding:9px 15px;cursor:pointer;
+  opacity:0;animation:introFel .7s 1.6s ease forwards;
+}
+@media (prefers-reduced-motion:reduce){#intro{display:none}}
+
 /* ============ animáció ============ */
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 html.js .rejt{opacity:0;transform:translateY(20px)}
@@ -374,6 +446,20 @@ html.js .rejt.be.k3{transition-delay:.24s}
 </style>
 </head>
 <body>
+
+<div id="intro">
+  <div class="intro-hatter"><img id="intro-img" alt=""></div>
+  <div class="intro-horizont" aria-hidden="true"></div>
+  <div class="intro-tartalom">
+    <p class="intro-eyebrow">Kasszandra &middot; Halkidiki</p>
+    <p class="intro-cim" id="intro-cim">Pefkochori</p>
+    <div class="intro-meander"><div class="meander" aria-hidden="true"></div></div>
+    <p class="intro-alcim" id="intro-alcim"></p>
+  </div>
+  <div class="intro-toltes" aria-hidden="true"><i></i></div>
+  <button id="intro-skip" type="button">Kihagyás</button>
+</div>
+
 <div id="halado" aria-hidden="true"></div>
 
 <div id="demo-szalag">
@@ -621,8 +707,57 @@ document.getElementById("hero-alcim").textContent = ADATOK.alcim;
 document.getElementById("zaras-alcim").textContent = ADATOK.cim+" · "+(ADATOK.alcim.match(/\d{4}/)||[""])[0];
 document.getElementById("ev").textContent = ADATOK.cim;
 
-/* --- hero cím betűnkénti belépő --- */
+/* ==========================================================================
+   CINEMATIKUS INTRO
+   A hossza itt állítható (ezredmásodpercben). 5000 = 5 másodperc.
+   Ha nem kell intro, írd át a HTML-ben a <div id="intro"> blokkot törölve,
+   vagy állítsd az INTRO_HOSSZ értékét 0-ra.
+   ========================================================================== */
+const INTRO_HOSSZ = 5000;
+
 (function(){
+  const intro = document.getElementById("intro");
+  if(!intro) return;
+
+  const keves = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(keves || INTRO_HOSSZ <= 0){ intro.remove(); heroBetuk(); return; }
+
+  document.body.style.overflow = "hidden";
+
+  // ugyanaz a kép, mint a nyitóképnél → a végén átúszik bele
+  document.getElementById("intro-img").src =
+    ADATOK.heroKep || helyorzo(ADATOK.heroMinta,1400,1700);
+  document.getElementById("intro-alcim").textContent = ADATOK.alcim || "";
+
+  // a cím betűnként, elmosódásból élesre
+  const cim = document.getElementById("intro-cim");
+  const szoveg = ADATOK.cim || cim.textContent;
+  cim.textContent = "";
+  [...szoveg].forEach((b,i)=>{
+    const s = document.createElement("span");
+    s.textContent = (b === " " ? " " : b);
+    s.style.animationDelay = (1.35 + i*0.075).toFixed(3) + "s";
+    cim.appendChild(s);
+  });
+
+  let vege = false;
+  function zar(){
+    if(vege) return;
+    vege = true;
+    intro.classList.add("megy");
+    document.body.style.overflow = "";
+    heroBetuk();
+    setTimeout(()=>intro.remove(), 1300);
+  }
+
+  document.getElementById("intro-skip").addEventListener("click", zar);
+  intro.addEventListener("click", e=>{ if(e.target.id !== "intro-skip") zar(); });
+  addEventListener("keydown", e=>{ if(e.key === "Escape" || e.key === " ") zar(); });
+  setTimeout(zar, INTRO_HOSSZ);
+})();
+
+/* --- hero cím betűnkénti belépő (az intro után indul) --- */
+function heroBetuk(){
   const h = document.getElementById("hero-cim");
   const szo = h.textContent;
   if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -635,7 +770,7 @@ document.getElementById("ev").textContent = ADATOK.cim;
     h.appendChild(s);
     requestAnimationFrame(()=>requestAnimationFrame(()=>{s.style.opacity="1";s.style.transform="none";}));
   });
-})();
+}
 
 /* --- „sajnálom” blokk --- */
 function bocsanatBlokk(f){
