@@ -359,6 +359,337 @@ footer{padding:clamp(28px,6vw,44px) var(--gut);text-align:center;color:var(--ink
 }
 @keyframes hull{to{transform:translateY(620px) rotate(560deg);opacity:0}}
 
+/* ============ A CSAPAT ============ */
+:root{--cs-arany:#EBCB86;--cs-ground:#07171A}
+.csapat{
+  position:relative;overflow:hidden;isolation:isolate;
+  background:var(--cs-ground);color:#EEF3F1;
+  padding-block:clamp(62px,12vw,130px);
+  margin-top:clamp(40px,8vw,80px);
+}
+.csapat::before{
+  content:"";position:absolute;inset:0;z-index:-2;
+  background:radial-gradient(90% 60% at 20% 0%,rgba(47,163,168,.16),transparent 60%),
+             radial-gradient(70% 50% at 95% 90%,rgba(235,203,134,.10),transparent 65%);
+}
+.cs-szellem{
+  position:absolute;top:clamp(-14px,-1vw,0px);left:0;right:0;z-index:-1;
+  pointer-events:none;user-select:none;white-space:nowrap;
+  font-family:var(--f-util);font-weight:700;text-transform:uppercase;
+  font-size:clamp(5rem,17vw,13rem);line-height:.86;letter-spacing:-.03em;
+  color:rgba(238,243,241,.055);
+  will-change:transform;
+}
+.cs-fej{position:relative;z-index:1}
+.cs-eyebrow{
+  font-family:var(--f-util);font-size:.64rem;font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--cs-arany);margin:0 0 .9em;
+}
+.cs-cim{
+  font-family:var(--f-util);font-weight:700;text-transform:uppercase;
+  font-size:clamp(3.2rem,13vw,8rem);line-height:.85;letter-spacing:-.035em;
+  color:#FFF;margin:0 0 clamp(26px,5vw,44px);
+}
+.cs-cim span{display:block;overflow:hidden}
+.cs-cim span i{display:block;font-style:normal;transform:translateY(105%);
+  transition:transform 1s cubic-bezier(.16,.9,.2,1)}
+.csapat.latszik .cs-cim span i{transform:none}
+.cs-cim span:nth-child(2) i{transition-delay:.1s}
+
+.cs-racs{
+  position:relative;z-index:1;display:grid;gap:11px;
+  grid-template-columns:repeat(2,1fr);perspective:1100px;
+}
+@media(min-width:560px){.cs-racs{grid-template-columns:repeat(4,1fr);gap:13px}}
+@media(min-width:1000px){.cs-racs{grid-template-columns:repeat(8,1fr);gap:14px}}
+
+.cs-kartya{
+  position:relative;border:0;padding:0;margin:0;width:100%;cursor:pointer;
+  aspect-ratio:5/9;border-radius:14px;overflow:hidden;
+  background:#0D2226;opacity:0;
+  box-shadow:0 10px 26px -18px rgba(0,0,0,.9);
+  transition:transform .55s cubic-bezier(.2,.85,.2,1),box-shadow .55s;
+}
+.cs-racs.be .cs-kartya{animation:csBe .9s cubic-bezier(.18,.85,.2,1) forwards;animation-delay:calc(var(--i)*.075s)}
+@keyframes csBe{
+  from{opacity:0;transform:translateY(42px) rotateX(20deg) scale(.9)}
+  to{opacity:1;transform:none}
+}
+.cs-kartya img{width:100%;height:100%;object-fit:cover;
+  transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s;filter:saturate(.92)}
+.cs-kartya::after{
+  content:"";position:absolute;inset:0;border-radius:14px;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:inset 0 -70px 60px -40px rgba(4,14,16,.95);
+  transition:border-color .45s;
+}
+.cs-sav{
+  position:absolute;top:0;left:0;right:0;height:3px;z-index:2;
+  background:var(--cs-arany);transform:scaleX(0);transform-origin:left;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.cs-nevke{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;padding:10px 8px 11px;
+  font-family:var(--f-util);font-weight:700;font-size:.6rem;
+  letter-spacing:.14em;text-transform:uppercase;color:#F2F7F5;
+  text-shadow:0 2px 10px rgba(0,0,0,.8);
+  transform:translateY(8px);opacity:.9;transition:transform .45s,opacity .45s;
+}
+.cs-szam{
+  position:absolute;top:9px;right:10px;z-index:2;
+  font-family:var(--f-util);font-weight:700;font-size:.58rem;letter-spacing:.1em;
+  color:rgba(255,255,255,.55);font-variant-numeric:tabular-nums;
+  transition:color .4s;
+}
+.cs-kartya:hover,.cs-kartya:focus-visible{
+  transform:translateY(-12px) scale(1.035);
+  box-shadow:0 26px 46px -22px rgba(0,0,0,.95),0 0 0 1px rgba(235,203,134,.25);
+}
+.cs-kartya:hover img,.cs-kartya:focus-visible img{transform:scale(1.07);filter:saturate(1.08)}
+.cs-kartya:hover .cs-sav,.cs-kartya:focus-visible .cs-sav{transform:scaleX(1)}
+.cs-kartya:hover .cs-nevke,.cs-kartya:focus-visible .cs-nevke{transform:none;opacity:1}
+.cs-kartya:hover .cs-szam,.cs-kartya:focus-visible .cs-szam{color:var(--cs-arany)}
+.cs-kartya:active{transform:translateY(-6px) scale(1.01)}
+
+/* --- modal --- */
+#cs-modal{position:fixed;inset:0;z-index:90;display:none}
+#cs-modal.nyit{display:block}
+.cs-fedo{
+  position:absolute;inset:0;background:rgba(4,12,14,.72);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  opacity:0;transition:opacity .45s ease;
+}
+#cs-modal.mutat .cs-fedo{opacity:1}
+.cs-panel{
+  position:absolute;inset:0;margin:auto;
+  width:min(940px,calc(100% - 24px));height:min(620px,calc(100% - 24px));
+  background:#0B1E22;border:1px solid rgba(255,255,255,.1);border-radius:18px;
+  overflow:hidden;display:grid;grid-template-rows:auto 1fr;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.95);
+  opacity:0;transform:translateY(22px) scale(.94);
+  transition:opacity .5s ease,transform .6s cubic-bezier(.2,.9,.25,1);
+}
+#cs-modal.mutat .cs-panel{opacity:1;transform:none}
+.cs-panel-belso{
+  display:grid;grid-template-rows:minmax(0,44%) 1fr;
+  height:100%;min-height:0;grid-row:1/-1;
+}
+@media(min-width:760px){
+  .cs-panel-belso{grid-template-rows:none;grid-template-columns:minmax(0,36%) 1fr}
+}
+.cs-panel-kep{position:relative;overflow:hidden;background:#0E2429;min-height:0}
+.cs-panel-kep img{
+  width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(1.12);
+  transition:opacity .7s ease .1s,transform 1.1s cubic-bezier(.2,.8,.2,1) .1s;
+}
+#cs-modal.mutat .cs-panel-kep img{opacity:1;transform:none}
+.cs-panel-info{
+  padding:clamp(18px,3.4vw,36px);overflow-y:auto;min-height:0;
+  display:flex;flex-direction:column;gap:clamp(10px,1.6vw,16px);
+}
+.cs-player{
+  font-family:var(--f-util);font-weight:700;font-size:.6rem;letter-spacing:.28em;
+  text-transform:uppercase;color:rgba(238,243,241,.5);margin:0;
+  font-variant-numeric:tabular-nums;
+}
+.cs-nev{
+  font-family:var(--f-util);font-weight:700;text-transform:uppercase;
+  font-size:clamp(2.2rem,7.5vw,4.2rem);line-height:.9;letter-spacing:-.03em;
+  color:#FFF;margin:0;
+}
+.cs-nev i{display:inline-block;font-style:normal;opacity:0;transform:translateY(.5em);
+  animation:csNev .6s cubic-bezier(.18,.9,.2,1) forwards}
+@keyframes csNev{to{opacity:1;transform:none}}
+.cs-motto{color:rgba(238,243,241,.72);margin:0;max-width:42ch;font-size:.98rem;line-height:1.55}
+.cs-statok{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:clamp(6px,1.4vw,14px)}
+.cs-stat{
+  border:1px solid rgba(255,255,255,.11);border-radius:12px;
+  background:rgba(255,255,255,.035);padding:11px 13px 13px;
+  opacity:0;transform:translateY(14px);
+  animation:csStat .55s cubic-bezier(.2,.9,.25,1) forwards;
+}
+@keyframes csStat{to{opacity:1;transform:none}}
+.cs-stat b{
+  display:block;font-family:var(--f-util);font-weight:700;font-size:.54rem;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(238,243,241,.45);margin-bottom:4px;
+}
+.cs-stat span{
+  display:block;font-family:var(--f-util);font-weight:700;font-size:.86rem;
+  letter-spacing:.06em;text-transform:uppercase;color:#EEF3F1;
+}
+.cs-stat.fo span{color:var(--cs-arany)}
+.cs-sug{
+  font-family:var(--f-util);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(238,243,241,.35);margin:auto 0 0;padding-right:104px;
+}
+/* --- karakter-mozdulatok --- */
+.cs-panel-kep img{cursor:pointer}
+.cs-panel-kep img.cs-mozog{transform-origin:50% 92%}
+.cs-panel-kep.razas{animation:kepRazas .7s cubic-bezier(.36,.07,.19,.97)}
+@keyframes kepRazas{
+  10%{transform:translate(-3px,2px)}20%{transform:translate(4px,-2px)}30%{transform:translate(-5px,1px)}
+  40%{transform:translate(4px,2px)}50%{transform:translate(-3px,-1px)}60%{transform:translate(3px,1px)}
+  70%{transform:translate(-2px,-2px)}80%{transform:translate(2px,1px)}90%{transform:translate(-1px,0)}
+  100%{transform:none}
+}
+
+.mv-security{animation:mvSecurity .95s cubic-bezier(.3,1.3,.4,1) both}
+@keyframes mvSecurity{
+  0%{transform:none}
+  16%{transform:translateY(-16px) scale(.98,1.05)}
+  30%{transform:translateY(0) scale(1.1,.88)}
+  42%{transform:translateY(0) scale(.96,1.05)}
+  54%{transform:scale(1.03,.98)}
+  68%,100%{transform:none}
+}
+.mv-tanc{animation:mvTanc 2.4s ease-in-out both}
+@keyframes mvTanc{
+  0%,100%{transform:none}
+  12%{transform:translate(-10px,-5px) rotate(-6deg)}
+  25%{transform:none}
+  37%{transform:translate(10px,-5px) rotate(6deg)}
+  50%{transform:none}
+  62%{transform:translate(-10px,-8px) rotate(-7deg) scale(1.02)}
+  75%{transform:none}
+  88%{transform:translate(10px,-8px) rotate(7deg) scale(1.02)}
+}
+.mv-foto{animation:mvFoto 1.15s cubic-bezier(.3,1.2,.4,1) both}
+@keyframes mvFoto{
+  0%{transform:none}
+  10%{transform:scale(1.1) rotate(-1.5deg)}
+  20%{transform:scale(1.02)}
+  34%{transform:scale(1.13) rotate(1.5deg)}
+  46%{transform:scale(1.02)}
+  100%{transform:none}
+}
+.mv-zavar{animation:mvZavar 1.9s ease-in-out both}
+@keyframes mvZavar{
+  0%,100%{transform:none}
+  10%{transform:rotate(-5deg) translateX(-6px)}
+  22%{transform:rotate(5deg) translateX(6px)}
+  34%{transform:rotate(-4deg) translateX(-5px)}
+  46%{transform:rotate(3deg) translateX(4px)}
+  58%{transform:none}
+  72%{transform:translateY(-7px) scale(1.03)}
+  84%{transform:translateY(0)}
+}
+.mv-napfeny{animation:mvNapfeny 2s cubic-bezier(.3,.9,.3,1) both}
+@keyframes mvNapfeny{
+  0%{transform:none;filter:none}
+  32%{transform:translateY(-15px) scale(1.05) rotate(-2.5deg);filter:brightness(1.14) saturate(1.16)}
+  62%{transform:translateY(-9px) rotate(2.5deg);filter:brightness(1.18) saturate(1.2)}
+  100%{transform:none;filter:none}
+}
+.mv-goz{animation:mvGoz 2.2s ease-in-out both}
+@keyframes mvGoz{
+  0%,100%{transform:none}
+  20%{transform:rotate(-4.5deg) translateY(-5px)}
+  45%{transform:rotate(3.5deg) translateX(8px)}
+  70%{transform:rotate(-2deg) translateY(-2px)}
+}
+.mv-hangos{animation:mvHangos 1.5s linear both}
+@keyframes mvHangos{
+  0%,100%{transform:none}
+  5%{transform:translate(-4px,0) rotate(-1.5deg)}
+  10%{transform:translate(4px,-2px) rotate(1.5deg) scale(1.02)}
+  16%{transform:translate(-5px,1px) rotate(-2deg)}
+  22%{transform:translate(5px,-1px) rotate(2deg) scale(1.03)}
+  28%{transform:translate(-6px,2px) rotate(-2.5deg)}
+  34%{transform:translate(6px,-2px) rotate(2.5deg) scale(1.05)}
+  42%{transform:translateY(-18px) scale(1.09,.93)}
+  52%{transform:translateY(0) scale(1.07,.94)}
+  60%{transform:scale(.97,1.04)}
+  72%{transform:scale(1.01,.99)}
+}
+.mv-karizma{animation:mvKarizma 1.8s cubic-bezier(.2,.9,.25,1) both}
+@keyframes mvKarizma{
+  0%{transform:translateY(12px) scale(.97);filter:brightness(.75)}
+  45%{transform:translateY(-8px) scale(1.05);filter:brightness(1.12)}
+  100%{transform:none;filter:none}
+}
+
+/* --- effektréteg --- */
+.cs-fx{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.fx-jel{
+  position:absolute;opacity:0;color:var(--cs-arany);
+  font-family:var(--f-util);font-weight:700;line-height:1;
+  text-shadow:0 2px 14px rgba(0,0,0,.6);
+  animation:fxFel 1.9s ease-out forwards;
+}
+@keyframes fxFel{
+  0%{opacity:0;transform:translateY(0) scale(.5)}
+  18%{opacity:1;transform:translateY(-22px) scale(1)}
+  100%{opacity:0;transform:translateY(-140px) scale(1.2) rotate(var(--r,0deg))}
+}
+.fx-gyuru{
+  position:absolute;left:50%;top:60%;width:40px;height:40px;margin:-20px 0 0 -20px;
+  border:2px solid var(--cs-arany);border-radius:99px;opacity:0;
+  animation:fxGyuru 1.15s ease-out forwards;
+}
+@keyframes fxGyuru{0%{opacity:.95;transform:scale(.25)}100%{opacity:0;transform:scale(4.6)}}
+.fx-por{
+  position:absolute;left:50%;bottom:5%;width:70%;height:16%;margin-left:-35%;border-radius:99px;
+  background:radial-gradient(ellipse at center,rgba(235,203,134,.5),transparent 70%);
+  opacity:0;animation:fxPor 1.1s ease-out forwards;
+}
+@keyframes fxPor{0%{opacity:0;transform:scale(.3,.5)}25%{opacity:.9}100%{opacity:0;transform:scale(1.9,1.2)}}
+.fx-villanas{position:absolute;inset:0;background:#fff;opacity:0;animation:fxVillanas 1.1s ease-out forwards}
+@keyframes fxVillanas{0%,7%{opacity:0}11%{opacity:.9}19%{opacity:0}33%{opacity:.72}42%{opacity:0}100%{opacity:0}}
+.fx-keret{
+  position:absolute;inset:8%;border:2px solid rgba(255,255,255,.85);border-radius:6px;
+  opacity:0;animation:fxKeret 1.1s ease-out forwards;
+}
+@keyframes fxKeret{0%{opacity:0;transform:scale(1.3)}22%{opacity:.95;transform:scale(1)}70%{opacity:.45}100%{opacity:0;transform:scale(.95)}}
+.fx-nap{
+  position:absolute;left:50%;top:46%;width:66%;aspect-ratio:1;margin:-33% 0 0 -33%;border-radius:99px;
+  background:radial-gradient(circle,rgba(235,203,134,.7),rgba(235,203,134,.14) 55%,transparent 72%);
+  opacity:0;animation:fxNap 1.9s ease-out forwards;
+}
+@keyframes fxNap{0%{opacity:0;transform:scale(.35)}32%{opacity:1}100%{opacity:0;transform:scale(2.1)}}
+.fx-csillag{
+  position:absolute;width:10px;height:10px;background:#FFF6DD;opacity:0;
+  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
+  animation:fxCsillag 1.4s ease-out forwards;
+}
+@keyframes fxCsillag{0%{opacity:0;transform:scale(0)}35%{opacity:1;transform:scale(1.35) rotate(45deg)}100%{opacity:0;transform:scale(.4) rotate(130deg)}}
+.fx-goz{
+  position:absolute;border-radius:99px;background:rgba(226,240,238,.5);filter:blur(6px);
+  opacity:0;animation:fxGozol 2.3s ease-out forwards;
+}
+@keyframes fxGozol{0%{opacity:0;transform:translateY(0) scale(.4)}22%{opacity:.8}100%{opacity:0;transform:translateY(-150px) scale(2.6)}}
+.fx-feny{
+  position:absolute;top:-40%;bottom:-40%;width:55%;left:-70%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:skewX(-18deg);animation:fxFeny 1.5s .25s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes fxFeny{to{left:135%}}
+.fx-reflektor{
+  position:absolute;left:50%;top:-12%;width:74%;height:135%;margin-left:-37%;
+  background:linear-gradient(180deg,rgba(235,203,134,.34),transparent 74%);
+  clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);
+  opacity:0;animation:fxRefl 1.9s ease-out forwards;
+}
+@keyframes fxRefl{0%{opacity:0}28%{opacity:1}100%{opacity:0}}
+
+.cs-zar{
+  position:absolute;top:12px;right:12px;z-index:5;
+  width:44px;height:44px;border-radius:99px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.18);background:rgba(10,28,32,.75);
+  color:#EEF3F1;font-size:1.15rem;line-height:1;
+  transition:transform .3s,background .3s;
+}
+.cs-zar:hover{transform:rotate(90deg);background:rgba(235,203,134,.2)}
+.cs-lep{
+  position:absolute;bottom:14px;z-index:5;width:40px;height:40px;border-radius:99px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);background:rgba(10,28,32,.7);color:#EEF3F1;
+  display:grid;place-items:center;transition:background .3s,transform .3s;
+}
+.cs-lep:hover{background:rgba(235,203,134,.2);transform:scale(1.08)}
+#cs-elozo{right:62px}
+#cs-kov{right:14px}
+@media(min-width:760px){#cs-elozo{right:70px}#cs-kov{right:20px}}
+
 /* ============ cinematikus intro ============ */
 #intro{
   position:fixed;inset:0;z-index:100;overflow:hidden;isolation:isolate;
@@ -510,7 +841,42 @@ amit valószínűleg még évek múlva is felemlegetünk.</p>
   </div>
 </section>
 
+<section class="csapat" id="csapat">
+  <div class="cs-szellem" id="cs-szellem" aria-hidden="true"></div>
+  <div class="szakasz">
+    <div class="blokk cs-fej">
+      <p class="cs-eyebrow" id="cs-eyebrow"></p>
+      <h2 class="cs-cim" id="cs-cim"></h2>
+    </div>
+    <div class="blokk">
+      <div class="cs-racs" id="cs-racs"></div>
+    </div>
+  </div>
+</section>
+
 </main>
+
+<div id="cs-modal" role="dialog" aria-modal="true" aria-label="Játékos adatlap">
+  <div class="cs-fedo"></div>
+  <div class="cs-panel">
+    <button class="cs-zar" id="cs-zar" type="button" aria-label="Bezárás">&#10005;</button>
+    <button class="cs-lep" id="cs-elozo" type="button" aria-label="Előző">&#10094;</button>
+    <button class="cs-lep" id="cs-kov" type="button" aria-label="Következő">&#10095;</button>
+    <div class="cs-panel-belso">
+      <div class="cs-panel-kep">
+        <img id="cs-m-kep" alt="">
+        <div class="cs-fx" id="cs-fx" aria-hidden="true"></div>
+      </div>
+      <div class="cs-panel-info">
+        <p class="cs-player" id="cs-m-player"></p>
+        <h3 class="cs-nev" id="cs-m-nev"></h3>
+        <p class="cs-motto" id="cs-m-motto"></p>
+        <div class="cs-statok" id="cs-m-statok"></div>
+        <p class="cs-sug">Koppints a figurára · kívülre a bezáráshoz</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="zaras">
   <div class="zaras-kep"><img id="zaras-img" alt="Utolsó reggel a tengerparton"></div>
@@ -644,11 +1010,55 @@ const ADATOK = {
     {nev:"Da Noi Beach Club ", leiras:"A házi strand, ahol a legtöbb napot töltöttük", tav:"0 km"},
     {nev:"Chanioti",          leiras:"A szomszéd falu",     tav:"4 km"},
 
-  ]
+  ],
+
+  /* ======================================================================
+     A CSAPAT
+     Minden tag: nev, kep, motto + pontosan 4 stat.
+     Az ELSŐ stat értéke aranyszínnel jelenik meg (mint a képen a CLASS).
+     A kép álló, kb. 2:3 arányú legyen. A sorrend = a PLAYER sorszám.
+     ====================================================================== */
+  csapat:{
+    eyebrow:"Nyolc játékos · egy squad",
+    cim:"A csapat.",
+    tagok:[
+      { nev:"Dénes", mozgas:"security", kep:"kepek/csapat/01.webp",
+        motto:"Izmos, erős és megállít bármit, ami elütné.",
+        statok:[["Class","Security"],["Passive","Mindig kész mindenre"],["Weakness","Side questek"],["Special","Egy tank"]] },
+
+      { nev:"Zsófi", mozgas:"tanc", kep:"kepek/csapat/02.webp",
+        motto:"Biztosan délig aludna, ha lehetne — de mindenre vehető.",
+        statok:[["Class","Mazsi"],["Passive","Bármire vevő"],["Weakness","Korai kelés"],["Special","Képek"]] },
+
+      { nev:"Tomi", mozgas:"foto", kep:"kepek/csapat/03.webp",
+        motto:"Valahogy mindig beteg lesz, de azért tengergyümölcsöt fog enni.",
+        statok:[["Class","Photographer"],["Passive","Van ennek foka"],["Weakness","Tengeri kaja"],["Special","Vagyunk végig"]] },
+
+      { nev:"Imi", mozgas:"zavar", kep:"kepek/csapat/04.webp",
+        motto:"Nem kedveli, ha elhagyják a sörét.",
+        statok:[["Class","No hablo inglish"],["Passive","Aprópénz"],["Weakness","Elhagyott sör"],["Special","Niksits lost"]] },
+
+      { nev:"Barbi", mozgas:"napfeny", kep:"kepek/csapat/05.webp",
+        motto:"Baklaváért a világ végére is megéri elmenni.",
+        statok:[["Class","Sunshine"],["Passive","Kaja"],["Weakness","Baklava"],["Special","Az kemény"]] },
+
+      { nev:"Martin", mozgas:"goz", kep:"kepek/csapat/06.webp",
+        motto:"AKA Doktorúr — vagy az e-cigit szívja, vagy a whiskey-colát szürcsöli.",
+        statok:[["Class","Doktorúr"],["Passive","E-cigi"],["Weakness","Mindenhol kocsit venne"],["Special","Whiskey-cola"]] },
+
+      { nev:"Dani", mozgas:"hangos", kep:"kepek/csapat/07.webp",
+        motto:"Hangos, szőrös, pont mint a yeti. (Ne fogadd el a random italát.)",
+        statok:[["Class","Yeti"],["Passive","Loud mode"],["Weakness","Mindenkit szeret"],["Special","Random szeszesital"]] },
+
+      { nev:"Adrián", mozgas:"karizma", kep:"kepek/csapat/08.png",
+        motto:"Mindenre vevő, de még nem tudja, mire vállalkozott.",
+        statok:[["Class","Újonc"],["Passive","Örök energiabomba"],["Weakness","Koktélok"],["Special","Karizma"]] }
+    ]
+  }
 };
 
 /* ==========================================================================
-   2) MOTOR — ezt nem kell szerkeszteni.
+   2) MOTOR — 
    ========================================================================== */
 document.documentElement.classList.add("js");
 
@@ -929,6 +1339,229 @@ ADATOK.fejezetek.forEach((f,fi)=>{
   sec.appendChild(blokk);
   fejWrap.appendChild(sec);
 });
+
+/* ==========================================================================
+   A CSAPAT — kártyák + adatlap
+   ========================================================================== */
+(function(){
+  const A = ADATOK.csapat;
+  const racs = document.getElementById("cs-racs");
+  const szakasz = document.getElementById("csapat");
+  if(!A || !A.tagok || !racs){ if(szakasz) szakasz.remove(); return; }
+
+  const tagok = A.tagok, N = tagok.length;
+  const ketjegy = n => String(n).padStart(2,"0");
+
+  /* cím + szellemcím */
+  document.getElementById("cs-eyebrow").textContent = A.eyebrow || "";
+  const cimEl = document.getElementById("cs-cim");
+  (A.cim || "A csapat.").split(" ").forEach(szo=>{
+    const s = document.createElement("span");
+    const i = document.createElement("i");
+    i.textContent = szo; s.appendChild(i); cimEl.appendChild(s);
+  });
+  const szellem = document.getElementById("cs-szellem");
+  szellem.textContent = (A.cim || "A csapat.").repeat(2);
+
+  /* kártyák */
+  tagok.forEach((t,i)=>{
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "cs-kartya";
+    b.style.setProperty("--i", i);
+    b.dataset.i = i;
+    b.setAttribute("aria-label", t.nev + " — adatlap megnyitása");
+    b.innerHTML =
+      `<span class="cs-sav"></span>` +
+      `<img src="${t.kep}" alt="${t.nev}" loading="lazy" decoding="async">` +
+      `<span class="cs-szam">${ketjegy(i+1)}</span>` +
+      `<span class="cs-nevke">${t.nev}</span>`;
+    racs.appendChild(b);
+  });
+
+  /* belépő animáció + a szellemcím lassú vízszintes sodrása */
+  if("IntersectionObserver" in window){
+    const io = new IntersectionObserver(be=>{
+      be.forEach(e=>{ if(e.isIntersecting){ racs.classList.add("be"); szakasz.classList.add("latszik"); io.disconnect(); } });
+    },{threshold:.12});
+    io.observe(racs);
+  }
+  setTimeout(()=>{ racs.classList.add("be"); szakasz.classList.add("latszik"); }, 2600);
+
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+    let tick = false;
+    addEventListener("scroll", ()=>{
+      if(tick) return; tick = true;
+      requestAnimationFrame(()=>{
+        const r = szakasz.getBoundingClientRect();
+        if(r.bottom > -200 && r.top < innerHeight + 200){
+          const h = (innerHeight - r.top) / (innerHeight + r.height);
+          szellem.style.transform = "translateX(" + (-h*26 - 4).toFixed(2) + "%)";
+        }
+        tick = false;
+      });
+    },{passive:true});
+  }
+
+  /* ---- adatlap ---- */
+  const modal   = document.getElementById("cs-modal");
+  const mKep    = document.getElementById("cs-m-kep");
+  const mPlayer = document.getElementById("cs-m-player");
+  const mNev    = document.getElementById("cs-m-nev");
+  const mMotto  = document.getElementById("cs-m-motto");
+  const mStat   = document.getElementById("cs-m-statok");
+  let aktiv = 0, honnan = null;
+
+  function tolt(i){
+    aktiv = (i + N) % N;
+    const t = tagok[aktiv];
+
+    mKep.src = t.kep; mKep.alt = t.nev;
+    mPlayer.textContent = "Player " + ketjegy(aktiv+1) + " / " + ketjegy(N);
+    mMotto.textContent = t.motto || "";
+
+    // név betűnként
+    mNev.textContent = "";
+    [...t.nev].forEach((b,k)=>{
+      const s = document.createElement("i");
+      s.textContent = (b === " " ? " " : b);
+      s.style.animationDelay = (0.12 + k*0.04).toFixed(3) + "s";
+      mNev.appendChild(s);
+    });
+
+    // négy stat, egyenként beugorva
+    mStat.innerHTML = "";
+    (t.statok || []).slice(0,4).forEach((st,k)=>{
+      const d = document.createElement("div");
+      d.className = "cs-stat" + (k === 0 ? " fo" : "");
+      d.style.animationDelay = (0.22 + k*0.08).toFixed(3) + "s";
+      d.innerHTML = `<b>${st[0]}</b><span>${st[1]}</span>`;
+      mStat.appendChild(d);
+    });
+
+    // képnek újraindítjuk a ráközelítést, majd jön a mozdulat
+    mKep.className = "";
+    mKep.style.transition = "none"; mKep.style.opacity = "0"; mKep.style.transform = "scale(1.12)";
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      mKep.style.transition = ""; mKep.style.opacity = ""; mKep.style.transform = "";
+    }));
+    clearTimeout(mozdulatOra);
+    mozdulatOra = setTimeout(mozdul, 520);
+  }
+
+  /* ---- karakter-mozdulatok ----
+     A "mozgas" mező választja ki. Lehetséges értékek:
+     security | tanc | foto | zavar | napfeny | goz | hangos | karizma   */
+  const fxReteg = document.getElementById("cs-fx");
+  let mozdulatOra = null, fxOra = null;
+
+  function elem(cls, stilus, szoveg){
+    const e = document.createElement("span");
+    e.className = cls;
+    if(szoveg) e.textContent = szoveg;
+    for(const k in (stilus||{})){
+      if(k.startsWith("--")) e.style.setProperty(k, stilus[k]);
+      else e.style[k] = stilus[k];
+    }
+    fxReteg.appendChild(e);
+    return e;
+  }
+  function jel(szoveg, i){
+    return elem("fx-jel", {
+      left:(16 + Math.random()*66) + "%",
+      bottom:(14 + Math.random()*20) + "%",
+      fontSize:(1.15 + Math.random()*1).toFixed(2) + "rem",
+      animationDelay:(i*0.17).toFixed(2) + "s",
+      "--r":((Math.random()*70-35)|0) + "deg"
+    }, szoveg);
+  }
+
+  function mozdul(){
+    const t = tagok[aktiv].mozgas || "napfeny";
+
+    mKep.className = "";
+    void mKep.offsetWidth;
+    mKep.className = "cs-mozog mv-" + t;
+
+    const keret = mKep.parentNode;
+    keret.classList.remove("razas");
+    void keret.offsetWidth;
+    if(t === "security" || t === "hangos") keret.classList.add("razas");
+
+    fxReteg.innerHTML = "";
+    if(t === "security"){
+      elem("fx-gyuru"); elem("fx-gyuru",{animationDelay:".13s"}); elem("fx-por");
+    } else if(t === "tanc"){
+      ["♪","♫","♩","♬","♪","♫"].forEach(jel);
+    } else if(t === "foto"){
+      elem("fx-villanas"); elem("fx-keret");
+    } else if(t === "zavar"){
+      ["?","?","?!","?"].forEach(jel);
+    } else if(t === "napfeny"){
+      elem("fx-nap");
+      for(let i=0;i<8;i++) elem("fx-csillag",{
+        left:(10 + Math.random()*78) + "%", top:(12 + Math.random()*64) + "%",
+        animationDelay:(i*0.1).toFixed(2) + "s"
+      });
+    } else if(t === "goz"){
+      for(let i=0;i<7;i++){
+        const m = 14 + Math.random()*22;
+        elem("fx-goz",{
+          left:(32 + Math.random()*32) + "%", bottom:(36 + Math.random()*16) + "%",
+          width:m + "px", height:m + "px", animationDelay:(i*0.21).toFixed(2) + "s"
+        });
+      }
+    } else if(t === "hangos"){
+      ["!","!","!"].forEach(jel);
+      for(let i=0;i<4;i++) elem("fx-gyuru",{animationDelay:(i*0.15).toFixed(2) + "s"});
+    } else if(t === "karizma"){
+      elem("fx-reflektor"); elem("fx-feny");
+    }
+
+    clearTimeout(fxOra);
+    fxOra = setTimeout(()=>{ fxReteg.innerHTML = ""; }, 2700);
+  }
+
+  mKep.addEventListener("click", mozdul);
+
+  function nyit(i){
+    honnan = document.activeElement;
+    tolt(i);
+    modal.classList.add("nyit");
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(()=>modal.classList.add("mutat"));
+    document.getElementById("cs-zar").focus();
+  }
+  function zar(){
+    modal.classList.remove("mutat");
+    document.body.style.overflow = "";
+    setTimeout(()=>modal.classList.remove("nyit"), 420);
+    if(honnan) honnan.focus();
+  }
+
+  racs.addEventListener("click", e=>{
+    const k = e.target.closest(".cs-kartya");
+    if(k) nyit(Number(k.dataset.i));
+  });
+  document.getElementById("cs-zar").addEventListener("click", zar);
+  document.getElementById("cs-elozo").addEventListener("click", ()=>tolt(aktiv-1));
+  document.getElementById("cs-kov").addEventListener("click", ()=>tolt(aktiv+1));
+  modal.querySelector(".cs-fedo").addEventListener("click", zar);
+
+  addEventListener("keydown", e=>{
+    if(!modal.classList.contains("nyit")) return;
+    if(e.key === "Escape") zar();
+    if(e.key === "ArrowLeft") tolt(aktiv-1);
+    if(e.key === "ArrowRight") tolt(aktiv+1);
+  });
+
+  let cx = 0, cy = 0;
+  modal.addEventListener("touchstart", e=>{ cx = e.changedTouches[0].clientX; cy = e.changedTouches[0].clientY; },{passive:true});
+  modal.addEventListener("touchend", e=>{
+    const dx = e.changedTouches[0].clientX - cx, dy = e.changedTouches[0].clientY - cy;
+    if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) tolt(aktiv + (dx < 0 ? 1 : -1));
+    else if(dy > 95 && Math.abs(dy) > Math.abs(dx)) zar();
+  },{passive:true});
+})();
 
 /* --- morzsák --- */
 document.getElementById("morzsak").innerHTML = ADATOK.morzsak
