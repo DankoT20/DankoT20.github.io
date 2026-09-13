@@ -1,0 +1,44 @@
+VAREL — logófájlok
+==================
+
+Ezek a fájlok a brand kit lapból lettek kinyerve, átlátszó háttérrel.
+
+MELYIKET MIRE
+-------------
+varel-logo-*.png          Teljes álló logó (V + VAREL + Visual Stories).
+                          Weboldal lábléce, névjegykártya, prezentáció címlapja.
+
+varel-vizszintes-*.png    Vízszintes lockup (V | VAREL). Fejléc, e-mail aláírás,
+                          bármi, ami széles és alacsony.
+
+varel-monogram-*.png      Csak a V. Profilkép, vízjel, kis méretű használat.
+varel-monogram-*.svg      Ugyanaz vektorosan — bármekkorára nagyítható,
+                          nem pixelesedik. Nyomdához ezt használd.
+
+varel-monogram-atlatszo-1024.png
+                          1024x1024, teljesen átlátszó háttér. Vízjelnek
+                          és közösségi média profilképnek.
+
+varel-app-ikon-512.png    512x512, obszidián háttérrel. App-ikon, Google
+                          cégprofil, bárhol, ahol négyzetes ikon kell.
+
+IVORY vagy OBSIDIAN?
+--------------------
+ivory    (#F5F1EA)  -> sötét háttérre. Ezt használja a weboldal.
+obsidian (#0B0B0B)  -> világos háttérre. Nyomtatáshoz fehér papírra.
+
+A WEBOLDAL MELLÉ
+----------------
+favicon.ico           A böngészőfülön megjelenő ikon.
+apple-touch-icon.png  iPhone/iPad kezdőképernyőre mentéskor.
+
+Mindkettő az index.html MELLÉ kerül, nem a logo mappába.
+
+FONTOS — NYOMDÁHOZ
+------------------
+A PNG-k a brand kit lapjából származnak, ezért a felbontásuk korlátozott
+(a teljes logó 429x335 pixel). Weben tökéletesek, de nagy méretű nyomtatáshoz
+(molinó, roll-up, tábla) kevés.
+
+Ha megvan az eredeti logócsomag SVG / AI / EPS / PDF fájlokkal — a brand kit
+lapja szerint ezek jártak hozzá —, nyomdai munkához mindig azt használd.

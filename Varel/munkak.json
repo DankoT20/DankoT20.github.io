@@ -1,0 +1,47 @@
+[
+  {
+    "kat": "rendezveny",
+    "cim": "Céges nyárzáró gokartozás",
+    "hely": "Debrecen",
+    "ho": "2026. augusztus",
+    "obj": "35mm",
+    "src": "images/gokart.jpg",
+    "ar": "1000/547"
+  },
+  {
+    "kat": "rendezveny",
+    "cim": "Napraforgó",
+    "hely": "",
+    "ho": "2026",
+    "obj": "35mm",
+    "src": "images/IMG_3663.jpg",
+    "ar": "1333/2000"
+  },
+  {
+    "kat": "portre",
+    "cim": "Dávid portréja",
+    "hely": "Debrecen",
+    "ho": "2026. augusztus",
+    "obj": "35mm",
+    "src": "images/IMG_5361.jpg",
+    "ar": "143/200"
+  },
+  {
+    "kat": "rendezveny",
+    "cim": "Quad túra",
+    "hely": "Valahol Görögországban",
+    "ho": "2026. augusztus",
+    "obj": "45mm",
+    "src": "images/IMG_4176.jpg",
+    "ar": "103/125"
+  },
+  {
+    "kat": "portre",
+    "cim": "Csillaglesen",
+    "hely": "Debrecen",
+    "ho": "2026",
+    "obj": "35mm",
+    "src": "images/IMG_3780.jpg",
+    "ar": "2000/1123"
+  }
+]
